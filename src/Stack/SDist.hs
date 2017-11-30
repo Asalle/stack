@@ -75,6 +75,8 @@ import qualified System.FilePath as FP
 data SDistOpts = SDistOpts
   { sdoptsDirsToWorkWith :: [String]
   -- ^ Directories to package
+  , sdoptsOutputDir :: [String]
+  -- ^ Directory to copy tarball to
   , sdoptsPvpBounds :: Maybe PvpBounds
   -- ^ PVP Bounds overrides
   , sdoptsIgnoreCheck :: Bool

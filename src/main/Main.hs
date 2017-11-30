@@ -750,7 +750,7 @@ sdistCmd sdistOpts go =
         forM_ dirs' $ \dir -> do
             (tarName, tarBytes, _mcabalRevision) <- getSDistTarball (sdoptsPvpBounds sdistOpts) dir
             distDir <- distDirFromDir dir
-            tarPath <- (distDir </>) <$> parseRelFile tarName
+            tarPath <- getTarPath
             ensureDir (parent tarPath)
             liftIO $ L.writeFile (toFilePath tarPath) tarBytes
             checkSDistTarball sdistOpts tarPath
@@ -985,3 +985,8 @@ instance Show MainException where
         [ "Got an invalid --cwd argument for stack exec ("
         , path
         , ")"]
+
+getTarPath :: String -> IO String
+getTarPath tarPath
+  | Empty = distDir </>) <$> parseRelFile tarName
+  | _     = (sdoptsOutputDir sdistOpts)
